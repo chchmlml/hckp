@@ -38,11 +38,11 @@
  		// NOTE: you should only define rules for those attributes that
  		// will receive user inputs.
  		return array(
- 				array('ts_u_name,ts_u_phone', 'required'),
+ 				array('tt_u_name,tt_u_phone', 'required'),
  				// The following rule is used by search().
  				// Please remove those attributes that should not be searched.
- 				array('ts_u_name,ts_u_phone', 'length', 'max'=>256),
- 				array('ts_u_name,ts_u_phone', 'safe', 'on'=>'search'),
+ 				array('tt_u_id,', 'length', 'max'=>256),
+ 				array('tt_u_name,tt_u_phone', 'safe', 'on'=>'search'),
  		);
  	}
  	/**

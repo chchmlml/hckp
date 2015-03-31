@@ -7,13 +7,14 @@ $config = array(
 	'name'=>'Yii::HCKP',
 	'defaultController' =>'dcenter',
 	// autoloading model and component classes
-	'import'=>array(
+	'import'=>array(		
 		'application.models.*',
 		'application.components.*',
+		'application.components.Utils.*',
 	),
 	'modules'=>array(
-		'plat' => array(),
-		'driver'=>array(),
+		'plat',
+		'driver',
 	),
 	// application components
 	'components'=>array(
@@ -27,12 +28,32 @@ $config = array(
 			),
 		),
 		'db'=>array(
-			'connectionString' =>'mysql:host=localhost;dbname=hckp;port=3306',
+			'connectionString' =>'mysql:host=127.0.0.1;dbname=test;port=3306',
 			'username' => 'root',
-			'password' => '',
+			'password' => 'e1f4f1dab7',
 			'charset' => 'utf8',
 		),
+		//memcache配置
+//		'mcache' => array(
+//				'class' => 'CMemCache',
+//				'servers' => array(
+//						array('host' => '127.0.0.1', 'port' => 11211),
+//				),
+//				'keyPrefix'=>'laravel',
+//				'hashKey' => false,
+//				'serializer' => false
+//
+//		),
+		//session配置
+//		'session' => array (
+//				'class'=> 'CCacheHttpSession',
+//				'cacheID' => 'mcache',
+//				'cookieMode' => 'only',
+//				'timeout' => 1200,
+//		),
 	),
-	'params'=>array(),
+	'params'=>array(
+		'api_config'=>require_once 'api/api_config.php',		
+	),
 );
 return $config;
