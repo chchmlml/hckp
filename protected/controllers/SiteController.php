@@ -19,7 +19,10 @@ class SiteController extends CController
 	}
 	
 	public function actionUserZone(){
-		$this->render('userzone');
+		$user_info=HckpSessionComponent::getInstance()->getVal('user_info');
+		$params = array();
+		$params['user_info'] = $user_info;
+		$this->render('userzone',$params);
 	}
 	/*** The following methods are Web service APIs ***/
 	public function actionNopri(){
@@ -60,6 +63,14 @@ class SiteController extends CController
 	 			'info'=>'用户名或密码错误'
 	 		);
  		}else{
+ 			HckpSessionComponent::getInstance()->initSession(array(
+ 				'user_id'=>$loginUser->ts_u_id,
+ 				'user_username'=>$loginUser->ts_u_username,
+ 				'user_phone'=>$loginUser->ts_u_phone,
+ 				'user_realname'=>$loginUser->ts_real_name,
+ 				'user_type'=>$loginUser->ts_u_type,
+ 				'user_headpic'=>$loginUser->ts_u_headpic
+ 			));
  			$info = array(
 	 			'status'=>1,
 	 			'info'=>'登录成功'
@@ -77,7 +88,7 @@ class SiteController extends CController
  		$user->ts_u_phone = $_POST['phone'];
  		$user->ts_u_password = Utils::getUserPassword($_POST['pwd']);
  		$user->ts_u_username = $_POST['username'] ? $_POST['username'] : $_POST['phone'];
- 		$user->ts_u_type = 0;
+ 		$user->ts_u_type = 3;
  		
  		$info = array();
  		if(!$user->validate()){	

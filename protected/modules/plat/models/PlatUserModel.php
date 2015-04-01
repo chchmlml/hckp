@@ -54,6 +54,11 @@
  	public function getUserList(){
  		return $this->findAll();
  	}
+ 	
+ 	
+ 	public function getPlatUserByPhone($phone){
+ 		$
+ 	}
  }
  
  

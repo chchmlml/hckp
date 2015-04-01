@@ -14,8 +14,9 @@
  */
  class UserController extends Controller{
  	public function actionIndex(){
- 		$this->layout=false;
- 		var_dump($_SERVER);exit;
+ 		
+ 		$r=array();
+ 		/*
  		$PlatUserModel=self::loadModel('PlatUserModel','plat',NULL,FALSE);
  		$r=array();
  		$r['tt_u_name']='dayunlong';
@@ -24,7 +25,9 @@
  		$PlatUserModel->save();
  		$user_list=$PlatUserModel->getUserList();
  		$r['test_list']=$user_list;
+ 		*/
  		$this->render('main',$r);
+ 		
  	}
  	
  	//用户登录验证

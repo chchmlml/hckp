@@ -4,11 +4,15 @@
  * All controller classes for this application should extend from this base class.
  */
 class Controller extends CController{
+	protected $_params=array();//当前参数
+	protected $_user_menu=array();
 	/**
 	 * (non-PHPdoc)
 	 * @see CController::init()
 	 */
 	public function init(){
+		//$this->_params=Yii::app()->request->getParams();
+		
 		parent::init();
 	}
 	/**
@@ -16,20 +20,21 @@ class Controller extends CController{
 	 * @see CController::beforeAction()
 	 */
 	protected function beforeAction($action){
-		//判断没有登陆请登陆	
 		return true;
-		/*
-		if(!empty(Yii::app()->request->getParam('apikey'))){
+		//判断没有登陆请登陆	
+		$apikey=Yii::app()->request->getParam('apikey');
+		if(!empty($apikey)){
 			return true;
 		}
-		*/
 		$user_info=HckpSessionComponent::getInstance()->getVal('user_info');
+		
 		if(empty($user_info)){
-			$this->redirect(APP_HOST."/site/nopri");//没有权限 	
+			$this->redirect(APP_HOST."/site/index");//没有权限 	
 		}else{
 			$this->_user_info=$user_info;
 			return true;
 		}
+		
 	}
 	
 	private $_user_info=array();
