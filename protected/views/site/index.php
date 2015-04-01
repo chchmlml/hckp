@@ -205,7 +205,7 @@
                             手机号/用户名
                         </P>
                     </DIV>
-                    <INPUT class="user inptText login-email" type="text">
+                    <INPUT class="user inptText login-email" name="username" type="text">
                 </DIV>
                 <DIV>
                     <DIV class="promptInpt">
@@ -213,7 +213,7 @@
                             密码
                         </P>
                     </DIV>
-                    <INPUT class="pwd01 inptText login-pwd" type="password">
+                    <INPUT class="pwd01 inptText login-pwd" name="passowrd" type="password">
                 </DIV>
                 <DIV class="H10">
                 </DIV>

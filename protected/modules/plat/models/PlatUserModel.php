@@ -55,10 +55,30 @@
  		return $this->findAll();
  	}
  	
- 	
+ 	/**
+ 	 * 通过phone查用户
+ 	 * @param unknown $phone
+ 	 * @return Ambigous <static, mixed, NULL, multitype:static , multitype:unknown Ambigous <static, NULL> , multitype:, multitype:unknown >
+ 	 * @date: 2015-4-1 下午10:17:48
+ 	 * @author: dayunlong<gengjun@qiyi.com>
+ 	 */
  	public function getPlatUserByPhone($phone){
- 		$
+ 		$UserInfo=$this->find('ts_u_phone=:ts_u_phone',array(':ts_u_phone'=>$phone));
+ 		return $UserInfo;
  	}
+ 	/**
+ 	 * 通过username查用户
+ 	 * @param unknown $username
+ 	 * @return Ambigous <static, mixed, NULL, multitype:static , multitype:unknown Ambigous <static, NULL> , multitype:, multitype:unknown >
+ 	 * @date: 2015-4-1 下午10:18:42
+ 	 * @author: dayunlong<gengjun@qiyi.com>
+ 	 */
+ 	public function getPlatUserByUsername($username){
+ 		$UserInfo=$this->find('ts_u_username=:ts_u_username',array(':ts_u_username'=>$username));
+ 		return $UserInfo;
+ 	}
+ 	
+ 	
  }
  
  

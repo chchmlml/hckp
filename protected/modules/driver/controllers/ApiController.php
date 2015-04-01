@@ -9,10 +9,7 @@ class ApiController extends Controller
 
     public function actionIndex()
     {
-        //URL::checkParems();
-        $body = URL::getBody();
-
-        $functionId = URL::GET("functionId", "actionRegister");
+        $functionId = URL::GET("functionId", "register");
         $this->$functionId();
     }
 
@@ -25,7 +22,7 @@ class ApiController extends Controller
     public function register()
     {
         $body['code'] = 100;
-        $body['result'] = [];
+        $body['result'] = array();
 
         Utils::retJson(1, 2, 3);
         //exit('注册');
@@ -99,27 +96,31 @@ class ApiController extends Controller
      */
     public function setCarLocation()
     {
-        if(!URL::validateParam()){
+        //验证
+        if (!URL::validateParam()) {
             URL::error403();
         }
-        //获取经纬度
         $body = URL::getBody();
         //检查必传参数
-        $result = URL::checkParam($body, array('w','e'));
-        if(!is_null($result)){
+        $result = URL::checkParam($body, array('w', 'e', 'driverId'));
+        if (!empty($result)) {
             URL::errorParams($result);
         }
-        URL::retJson(1, $result, $body);
-//
-//        $driverGpsModel = self::loadModel('DriverGpsModel', 'driver', NULL, FALSE);
-////        $r=array();
-////        $r['ts_u_name']='dayunlong';
-////        $r['ts_u_phone']='15026912738';
-////        $PlatUserModel->attributes=$r;
-//        //$PlatUserModel->save();
-//        $locationList = $driverGpsModel->getLocationList();
-//
-//        URL::retJson(1, 2, $locationList);
+
+        $driverGpsModel = self::loadModel('DriverGpsModel', 'driver', NULL, FALSE);
+        $r = array();
+        $r['tp_d_id'] = $body['driverId'];
+        $r['tp_dg_city'] = $body['city'];
+        $r['tp_dg_gps'] = $body['w'] . ',' . $body['e'];
+        $r['tp_dg_time'] = time();
+        $driverGpsModel->attributes = $r;
+        if ($driverGpsModel->save()) {
+            URL::retJson(0, 'SUCCESS', array());
+        } else {
+            URL::errorServer('添加坐标失败');
+        }
+        //$locationList = $driverGpsModel->getLocationList();
+        //URL::retJson(0, 'SUCCESS', $locationList);
     }
 
 }

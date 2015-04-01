@@ -32,6 +32,41 @@ class SiteController extends CController
 	 * 站点登陆 
 	 */
 	public function actionLogin(){
+		$username=Yii::app()->request->getParam('email');
+		$passowrd=Yii::app()->request->getParam('psw');
+		$PlatUserComponent=SystemComponent::loadComponent('PlatUserComponent','plat');
+		die();	
+		if($username == $username+0 ){
+			$UserInfo=$PlatUserComponent->getPlatUserByUsername($username);
+		}else{
+			$UserInfo=$PlatUserComponent->getPlatUserByPhone($username);
+		}
+		$code=0;
+		$msg='';
+		
+		if( $UserInfo == false){
+			$msg='当前用户或者手机号不存在!';
+			URL::retJson($code, $msg);
+		}
+		$check_psw=Utils::getUserPassword($passowrd);
+		if($check_psw !== $UserInfo->ts_u_password){
+			$msg='密码不对!';//
+			URL::retJson($code, $msg);
+		}
+		$code=1;
+		$msg='登陆成功!';
+		//生成session
+		HckpSessionComponent::getInstance()->initSession(array(
+		'user_id'=>$UserInfo->ts_u_id,
+		'user_username'=>$UserInfo->ts_u_username,
+		'user_phone'=>$UserInfo->ts_u_phone,
+		'user_realname'=>$UserInfo->ts_real_name,
+		'user_type'=>$UserInfo->ts_u_type,
+		'user_headpic'=>$UserInfo->ts_u_headpic
+		));
+		URL::retJson($code, $msg);
+		
+		/*
 		$this->layout=false;
 		//login的登陆处理方法
 		//如果有跳转的目标地址跳转到目标地址	
@@ -78,6 +113,7 @@ class SiteController extends CController
  		}
  		echo json_encode($info);
  		die();
+ 		*/
 	}
 	
 	/**

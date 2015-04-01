@@ -25,8 +25,9 @@ class DriverGpsModel extends CActiveRecord
      */
     public function rules()
     {
-
-        return array();
+        return array(
+            array('tp_d_id,tp_dg_city,tp_dg_gps,tp_dg_time', 'required'),
+        );
     }
 
     public function getLocationList()

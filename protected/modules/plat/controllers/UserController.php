@@ -14,7 +14,6 @@
  */
  class UserController extends Controller{
  	public function actionIndex(){
- 		
  		$r=array();
  		/*
  		$PlatUserModel=self::loadModel('PlatUserModel','plat',NULL,FALSE);
@@ -28,11 +27,16 @@
  		*/
  		$this->render('main',$r);
  		
- 	}
- 	
- 	//用户登录验证
+ 	} 	
+ 	/**
+ 	 * ajax用户登陆验证
+ 	 * @date: 2015-4-1 下午10:21:05
+ 	 * @author: dayunlong<gengjun@qiyi.com>
+ 	 */
  	public function actionLogin(){
  		
+ 		
+ 		/*
  		$user=self::loadModel('UserModel','plat',NULL,FALSE);
  		$loginUser = $user->find(
  			array(
@@ -54,6 +58,7 @@
  		}
  		echo json_encode($info);
  		die();
+ 		*/
  	}
  	
  	public function actionRegist(){

@@ -29,7 +29,8 @@ $config = array(
 			),
 		),
 		'db'=>array(
-			'connectionString' =>'mysql:host=182.92.219.85;dbname=test;port=3306',
+			'connectionString' =>'mysql:host=182.92.219.85;dbname=hckp;port=3306',
+			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'e1f4f1dab7',
 			'charset' => 'utf8',

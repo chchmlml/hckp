@@ -12,6 +12,21 @@ class URL
      * @return mixed
      * @author haven<chchmlml@163.com>
      */
+    public static function errorServer($r = '')
+    {
+        header('Content-type: ' . 'application/json');
+        $_retArr = array();
+        $_retArr['code'] = '500';
+        $_retArr['msg'] = empty($r) ? '服务器错误' : $r;
+        $_retArr['data'] = null;
+        echo CJSON::encode($_retArr);
+        exit;
+    }
+
+    /**
+     * @return mixed
+     * @author haven<chchmlml@163.com>
+     */
     public static function errorParams($r = '')
     {
         header('Content-type: ' . 'application/json');
@@ -22,6 +37,7 @@ class URL
         echo CJSON::encode($_retArr);
         exit;
     }
+
     /**
      * @return mixed
      * @author haven<chchmlml@163.com>
@@ -128,15 +144,16 @@ class URL
      * @param unknown $obj
      * @return multitype:number unknown
      */
-    public static function retJson($sflag, $msg, $obj=null)
+    public static function retJson($sflag, $msg, $obj = null)
     {
         header('Content-type: ' . 'application/json');
         $_retArr = array();
         $_retArr['code'] = $sflag;
         $_retArr['msg'] = $msg;
-        if(!is_null($obj)){
-        	$_retArr['data'] = $obj;
-        }        
+        if (!is_null($obj)) {
+            $_retArr['data'] = $obj;
+        }
         echo CJSON::encode($_retArr);
+        die();
     }
 }
